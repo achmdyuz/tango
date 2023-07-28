@@ -47,26 +47,23 @@ def tangoWoYomu():
             tango_id, tango, yomiKata, imi, nichiji = tango
             print(f"ID: {tango_id}\n単語: {tango}\n読み方: {yomiKata}\n意味: {imi}\n日時: {nichiji}\n")
 
-# def tangoWoKousin():
-#     tango_id = input('更新「こうしん」するエントリのIDを入力「にゅうりょく」して下さい「ください」 ')
-#     tango
-#     yomiKata
-#     imi
-#     nichiji
-#     entry_id = input("更新するエントリのIDを入力してください (Enter the ID of the entry to update): ")
-#     entry_text = input("更新後の日記の内容を入力してください (Enter the updated journal entry): ")
-#     location = input("更新後の場所を入力してください (Enter the updated location): ")
+def tangoWoKousin():
+    tango_id = input('更新「こうしん」するエントリのIDを入力「にゅうりょく」して下さい「ください」 ')
+    tango = input('更新「こうしん」するエントリの単語「たんご」の内容「ないよう」を入力「にゅうりょく」して下さい「ください」 ')
+    yomiKata = input('更新「こうしん」するエントリの読み方「よみかた」の内容「ないよう」を入力「にゅうりょく」して下さい「ください」 ')
+    imi = input('更新「こうしん」するエントリの意味「いみ」の内容「ないよう」を入力「にゅうりょく」して下さい「ください」 ')
+    nichiji = input('更新「こうしん」するエントリの日時「にちじ」の内容「ないよう」を入力「にゅうりょく」して下さい「ください」 ')
 
-#     cursor.execute("UPDATE journal SET entry_text = ?, location = ? WHERE id = ?", (entry_text, location, entry_id))
-#     conn.commit()
-#     print("エントリが正常に更新されました！ (Entry updated successfully!)")
+    cursor.execute("UPDATE tango SET tango = ?, yomiKata = ?, imi = ?, nichiji = ?  WHERE tango_id = ?", (tango, yomiKata, imi, nichiji, tango_id))
+    conn.commit()
+    print("エントリが正常に更新されました！ (Entry updated successfully!)")
 
-# def delete_entry():
-#     entry_id = input("削除するエントリのIDを入力してください (Enter the ID of the entry to delete): ")
+def tangoWoSakujyosuru():
+    tango_id = input("削除するエントリのIDを入力してください:  ")
 
-#     cursor.execute("DELETE FROM journal WHERE id = ?", (entry_id,))
-#     conn.commit()
-#     print("エントリが正常に削除されました！ (Entry deleted successfully!)")
+    cursor.execute("DELETE FROM tango WHERE tango_id = ?", (tango_id,))
+    conn.commit()
+    print("エントリが正常に削除されました！ (Entry deleted successfully!)")
 
 # メインのプログラムループ (Main program loop)
 while True:
@@ -85,7 +82,7 @@ while True:
     elif choice == '3':
         tangoWoKousin()
     elif choice == '4':
-        delete_entry()
+        tangoWoSakujyosuru()
     elif choice == '5':
         break
     else:

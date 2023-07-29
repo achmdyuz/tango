@@ -35,13 +35,6 @@ def tangoWoYomu():
     cursor.execute("SELECT * FROM tango")
     entries = cursor.fetchall()
 
-    # if entries:
-    #     for entry in entries:
-    #         entry_id, entry_date, location, entry_text = entry
-    #         print(f"ID: {entry_id}\n日付: {entry_date}\n場所: {location}\nエントリ: {entry_text}\n")
-    # else:
-    #     print("エントリが見つかりませんでした。 (No entries found.)")
-
     if entries:
         for tango in entries:
             tango_id, tango, yomiKata, imi, nichiji = tango

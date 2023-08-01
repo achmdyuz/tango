@@ -58,15 +58,27 @@ def tangoWoSakujyosuru():
     conn.commit()
     print("エントリが正常に削除されました！ (Entry deleted successfully!)")
 
+# 2023年08月01日「火曜日」13時16分
+def entoriWoKazoeru():
+    # データベース内「ない」のエントリの数「かず」を取得「しゅとく」する
+    # Get the count of the database entries
+    cursor.execute("SELECT COUNT(*) FROM tango")
+    count =  cursor.fetchone()[0]
+    print(f"データベース内「ない」のエントリ数「かず」：{count}件「けん」\n")
+                
 # メインのプログラムループ (Main program loop)
-while True:
-    print("1. エントリの作成 (Create entry)")
-    print("2. エントリの表示 (Read entries)")
-    print("3. エントリの更新 (Update entry)")
-    print("4. エントリの削除 (Delete entry)")
-    print("5. 終了 (Quit)")
 
-    choice = input("選択肢を入力してください (Enter your choice): ")
+# 2023年08月01日「火曜日」13時25分
+entoriWoKazoeru()
+
+while True:
+    print("1. エントリの作成「さくせい」 (Create entry)")
+    print("2. エントリの表示「ひょうじ」 (Read entries)")
+    print("3. エントリの更新「こうしん」 (Update entry)")
+    print("4. エントリの削除「さくじょ」 (Delete entry)")
+    print("5. 終了「しゅうりょう」 (Quit)")
+
+    choice = input("選択肢「せんたくし」を入力「にゅうりょく」してください (Enter your choice): ")
 
     if choice == '1':
         tangoWoIrete()
@@ -79,7 +91,7 @@ while True:
     elif choice == '5':
         break
     else:
-        print("無効な選択肢です。もう一度お試しください。 (Invalid choice. Please try again.)")
+        print("無効な「むこうな」選択肢「せんたくし」です。もう一度お試しください「おためしください」。 (Invalid choice. Please try again.)")
 
 # データベース接続を閉じます (Close the database connection)
 conn.close()

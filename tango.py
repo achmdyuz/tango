@@ -3,11 +3,11 @@
 
 import sqlite3
 
-# SQLiteデータベースに接続します (Connect to the SQLite database)
+# SQLiteデータベースに接続「せつぞく」します (Connect to the SQLite database)
 conn = sqlite3.connect('db/tango.db')
 cursor = conn.cursor()
 
-# 日記「にっき」ルテーブルが存在しない場合は作成します (Create the tango table if it doesn't exist)
+# 日記 「にっき」ルテーブルが存在「そんざい」しない場合は「ばあいは」作成「さくせい」します (Create the tango table if it doesn't exist)
 
 cursor.execute ( ''' CREATE TABLE IF NOT EXISTS tango (
                      tango_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,20 +18,20 @@ cursor.execute ( ''' CREATE TABLE IF NOT EXISTS tango (
                      );''')
 
 def tangoWoIrete():
-    # ユーザーからの入力を受け取ります (Prompt the user for input)
+    # ユーザーからの入力「にゅうりょく」を受け取り「うけとり」ます (Prompt the user for input)
 
     tango = input('単語「たんご」は？ ')
     yomiKata = input('読み方「よみかた」は？ ')
     imi = input('意味「いみ」は？ ')
     nichiji = input('日時「にちじ」は？ ')
 
-        # エントリをデータベースに挿入します (Insert the entry into the database)
+        # エントリをデータベースに挿入「そうにゅう」します (Insert the entry into the database)
     cursor.execute("INSERT INTO tango (tango, yomiKata, imi, nichiji) VALUES (?, ?, ?, ?)", (tango, yomiKata, imi, nichiji))
     conn.commit()
-    print("エントリが正常に作成されました！ (Entry created successfully!)")
+    print("エントリが正常「せいじょう」に作成「さくせい」されました！ (Entry created successfully!)")
 
 def tangoWoYomu():
-    # データベースからすべてのエントリを取得します (Retrieve all entries from the database)
+    # データベースからすべてのエントリを取得「しゅとく」します (Retrieve all entries from the database)
     cursor.execute("SELECT * FROM tango")
     entries = cursor.fetchall()
 
@@ -49,14 +49,14 @@ def tangoWoKousin():
 
     cursor.execute("UPDATE tango SET tango = ?, yomiKata = ?, imi = ?, nichiji = ?  WHERE tango_id = ?", (tango, yomiKata, imi, nichiji, tango_id))
     conn.commit()
-    print("エントリが正常に更新されました！ (Entry updated successfully!)")
+    print("エントリが正常「せいじょう」に更新「こうしん」されました！ (Entry updated successfully!)")
 
 def tangoWoSakujyosuru():
-    tango_id = input("削除するエントリのIDを入力してください:  ")
+    tango_id = input("削除「さくじょ」するエントリのIDを入力「にゅうりょく」してください:  ")
 
     cursor.execute("DELETE FROM tango WHERE tango_id = ?", (tango_id,))
     conn.commit()
-    print("エントリが正常に削除されました！ (Entry deleted successfully!)")
+    print("エントリが正常「せいじょう」に削除「さくじょ」されました！ (Entry deleted successfully!)")
 
 # 2023年08月01日「火曜日」13時16分
 def entoriWoKazoeru():
@@ -66,6 +66,24 @@ def entoriWoKazoeru():
     count =  cursor.fetchone()[0]
     print(f"データベース内「ない」のエントリ数「かず」：{count}件「けん」\n")
                 
+# 2023年08月03日「木曜日」11時49分
+    
+def search():
+    searchIt = input('何「なに」フレーズを検索「けんさく」する欲しい「ほしい」？ ')
+    
+    # データベースからフレーズを検索「けんさく」して結果「けっか」を表示「ひょうじ」します
+    # Search for the phrase in the database and display the results
+    cursor.execute("SELECT * FROM tango WHERE tango LIKE ? OR yomiKata LIKE ? OR imi LIKE ?", (f"%{searchIt}%", f"%{searchIt}%", f"%{searchIt}%"))
+    results = cursor.fetchall()
+
+    if results:
+        print("検索結果「けんさくけっか」:")
+        for tango in results:
+            tango_id, tango, yomiKata, imi, nichiji = tango
+            print(f"ID: {tango_id}\n単語: {tango}\n読み方: {yomiKata}\n意味: {imi}\n日時: {nichiji}\n")
+    else:
+        print("検索結果「けんさくけっか」はありません。")
+
 # メインのプログラムループ (Main program loop)
 
 # 2023年08月01日「火曜日」13時25分
@@ -77,6 +95,7 @@ while True:
     print("3. エントリの更新「こうしん」 (Update entry)")
     print("4. エントリの削除「さくじょ」 (Delete entry)")
     print("5. 終了「しゅうりょう」 (Quit)")
+    print("6, エントリの検索「けんさく」 (Search entry)")
 
     choice = input("選択肢「せんたくし」を入力「にゅうりょく」してください (Enter your choice): ")
 
@@ -90,8 +109,10 @@ while True:
         tangoWoSakujyosuru()
     elif choice == '5':
         break
+    elif choice == '6':
+        search()
     else:
-        print("無効な「むこうな」選択肢「せんたくし」です。もう一度お試しください「おためしください」。 (Invalid choice. Please try again.)")
+        print("無効な「むこうな」選択肢「せんたくし」です。もう一度「いちど」お試しください「おためしください」。 (Invalid choice. Please try again.)")
 
 # データベース接続を閉じます (Close the database connection)
 conn.close()

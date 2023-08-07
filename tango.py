@@ -4,11 +4,12 @@
 import sqlite3
 
 # SQLiteデータベースに接続「せつぞく」します (Connect to the SQLite database)
+# SQLiteデータベースに接続「せつぞく」する 「Connect to the SQLite database」
 conn = sqlite3.connect('db/tango.db')
 cursor = conn.cursor()
 
-# 日記 「にっき」ルテーブルが存在「そんざい」しない場合は「ばあいは」作成「さくせい」します (Create the tango table if it doesn't exist)
-
+# 日記 「にっき」テーブルが存在「そんざい」しない場合は「ばあいは」作成「さくせい」します (Create the tango table if it doesn't exist)
+# 日記「にっき」テーブルが存在「そんざい」しない場合は「ばあいは」作成「さくせい」する 「Create the tango table if it doesn't exist」
 cursor.execute ( ''' CREATE TABLE IF NOT EXISTS tango (
                      tango_id INTEGER PRIMARY KEY AUTOINCREMENT,
                      tango VARCHAR NOT NULL UNIQUE,
@@ -19,19 +20,24 @@ cursor.execute ( ''' CREATE TABLE IF NOT EXISTS tango (
 
 def tangoWoIrete():
     # ユーザーからの入力「にゅうりょく」を受け取り「うけとり」ます (Prompt the user for input)
+    # ユーザーからの入力「にゅうりょく」を受け取「うけと」る 「Prompt the user for input」
 
+    nichiji = input('日時「にちじ」は？ ')
     tango = input('単語「たんご」は？ ')
     yomiKata = input('読み方「よみかた」は？ ')
     imi = input('意味「いみ」は？ ')
-    nichiji = input('日時「にちじ」は？ ')
+
 
         # エントリをデータベースに挿入「そうにゅう」します (Insert the entry into the database)
+       # エントリをデータベースに挿入「そうにゅう」する「Insert the entry into the database」
+       
     cursor.execute("INSERT INTO tango (tango, yomiKata, imi, nichiji) VALUES (?, ?, ?, ?)", (tango, yomiKata, imi, nichiji))
     conn.commit()
-    print("エントリが正常「せいじょう」に作成「さくせい」されました！ (Entry created successfully!)")
+    print("エントリが正常「せいじょう」に作成「さくせい」された！「Entry created successfully!」")
 
 def tangoWoYomu():
     # データベースからすべてのエントリを取得「しゅとく」します (Retrieve all entries from the database)
+   #データベースから全て「すべて」のエントリを取得「しゅとく」する「Retrieve all entries from the database」2023年08月07日「月曜日」午後20時53分：今日はここまで！
     cursor.execute("SELECT * FROM tango")
     entries = cursor.fetchall()
 

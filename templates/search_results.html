@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+  <!-- <meta name="description" content="First mixed HTML"> -->
+  <!-- <meta name="keywords" content="HTML, CSS, XML, JavaScript, 日本語, Japanese"> -->
+  <meta name="author" content="Ahmad Yusriyansyah">
+  <!-- <meta http-equiv="refresh" content="15"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="id=edge">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- <link rel="shortcut icon" type="image" href="favicon.png"> -->  
+  <!-- External css references -->
+  <!-- <link rel="stylesheet" href="https://www.w3schools.com/html/styles.css"> -->
+  <!-- <style> -->
+  
+  <!-- </style> -->
+</head>
+
+<body>
+
+   <h1>Search Results</h1>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>単語</th>
+            <th>読み方</th>
+            <th>意味</th>
+            <th>日時</th>
+        </tr>
+        {% for entry in results %}
+        <tr>
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>{{ entry[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="/search">Back to Search</a>
+
+  <script src="main.js"></script> 
+
+</body>
+</html>

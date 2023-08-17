@@ -5,7 +5,7 @@ import sqlite3
 
 app = Flask(__name__)
 
-DATABASE = 'db/tango.db'
+DATABASE = 'testDb.db'
 
 def get_db_connection():
     return sqlite3.connect(DATABASE)
